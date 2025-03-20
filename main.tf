@@ -178,7 +178,7 @@ resource "aws_instance" "bastion" {
   ami             = "var.ami" # Update with latest AMI
   instance_type   = "var.instance_type"
   key_name        = var.key_name
-  subnet_id       = aws_subnet.public[count.index].id
+  subnet_id       = aws_subnet.public_az1[count.index].id
   security_groups = [aws_security_group.ec2_sg.id]
 }
 
@@ -188,6 +188,6 @@ resource "aws_instance" "private_instance" {
   ami             = "var.ami" # Update with latest AMI
   instance_type   = "var.instance_type"
   key_name        = var.key_name
-  subnet_id       = aws_subnet.private[count.index].id
+  subnet_id       = aws_subnet.private_az1[count.index].id
   security_groups = [aws_security_group.ec2_sg.id]
 }
