@@ -107,7 +107,7 @@ resource "aws_lb" "alb" {
 # Launch Template
 resource "aws_launch_template" "lt" {
   name_prefix   = "asg-template"
-  image_id      = "ami-0c55b159cbfafe1f0" # Replace with the latest AMI ID
+  image_id      = "ami-04b4f1a9cf54c11d0" # Replace with the latest AMI ID
   instance_type = var.instance_type
   key_name      = var.key_name
   vpc_security_group_ids = [aws_security_group.ec2_sg.id]
