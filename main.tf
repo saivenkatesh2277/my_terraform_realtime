@@ -172,3 +172,22 @@ resource "aws_autoscaling_group" "asg" {
     version = "$Latest"
   }
 }
+
+resource "aws_instance" "bastion" {
+  count           = var.countpublic
+  ami             = "var.ami" # Update with latest AMI
+  instance_type   = "var.instance_type"
+  key_name        = var.key_name
+  subnet_id       = aws_subnet.public[count.index].id
+  security_groups = [aws_security_group.ec2_sg.id]
+}
+
+# Private EC2 Instances
+resource "aws_instance" "private_instance" {
+  count           = var.countprivate
+  ami             = "var.ami" # Update with latest AMI
+  instance_type   = "var.instance_type"
+  key_name        = var.key_name
+  subnet_id       = aws_subnet.private[count.index].id
+  security_groups = [aws_security_group.ec2_sg.id]
+}
