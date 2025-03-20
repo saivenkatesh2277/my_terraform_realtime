@@ -1,52 +1,73 @@
+# AWS Region
 variable "region" {
   description = "AWS region"
   type        = string
   default     = "us-east-1"
 }
 
+# VPC
 variable "vpc_cidr" {
   description = "VPC CIDR block"
   type        = string
-  default     = "10.0.0.0/16"
 }
 
-variable "public_subnet_cidr" {
-  description = "Public subnet CIDR"
+# Public Subnets
+variable "public_subnet_cidr_az1" {
+  description = "Public Subnet CIDR in AZ1"
   type        = string
-  default     = "10.0.1.0/24"
 }
 
-variable "private_subnet_cidr" {
-  description = "Private subnet CIDR"
+variable "public_subnet_cidr_az2" {
+  description = "Public Subnet CIDR in AZ2"
   type        = string
-  default     = "10.0.2.0/24"
 }
 
+# Private Subnets
+variable "private_subnet_cidr_az1" {
+  description = "Private Subnet CIDR in AZ1"
+  type        = string
+}
+
+variable "private_subnet_cidr_az2" {
+  description = "Private Subnet CIDR in AZ2"
+  type        = string
+}
+
+# Availability Zones
+variable "az1" {
+  description = "First Availability Zone"
+  type        = string
+}
+
+variable "az2" {
+  description = "Second Availability Zone"
+  type        = string
+}
+
+# EC2 Configuration
 variable "instance_type" {
   description = "Instance type for EC2"
   type        = string
-  default     = "t3.micro"
+  default     = "t2.micro"
 }
 
 variable "key_name" {
-  description = "Key pair name for SSH access"
+  description = "Key pair for EC2 instance"
   type        = string
 }
 
+# Auto Scaling Group
 variable "desired_capacity" {
   description = "Desired number of instances in ASG"
   type        = number
-  default     = 2
 }
 
 variable "max_size" {
   description = "Maximum number of instances in ASG"
   type        = number
-  default     = 3
 }
 
 variable "min_size" {
   description = "Minimum number of instances in ASG"
   type        = number
-  default     = 1
 }
