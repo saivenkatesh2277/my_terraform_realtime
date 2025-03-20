@@ -107,7 +107,7 @@ resource "aws_lb" "alb" {
 # Launch Template
 resource "aws_launch_template" "lt" {
   name_prefix   = "asg-template"
-  image_id      = "ami-04b4f1a9cf54c11d0" # Replace with the latest AMI ID
+  image_id      = "var.ami" # Replace with the latest AMI ID
   instance_type = var.instance_type
   key_name      = var.key_name
   vpc_security_group_ids = [aws_security_group.ec2_sg.id]
@@ -125,3 +125,25 @@ resource "aws_autoscaling_group" "asg" {
     version = "$Latest"
   }
 }
+
+
+# Bastion Hosts (EC2 in Public Subnets)
+resource "aws_instance" "bastion" {
+  count           = var.countpublic
+  ami             = "var.ami" # Update with latest AMI
+  instance_type   = "var.instance_type"
+  key_name        = var.key_name
+  subnet_id       = aws_subnet.public[count.index].id
+  security_groups = [aws_security_group.ec2_sg.id]
+}
+
+# Private EC2 Instances
+resource "aws_instance" "private_instance" {
+  count           = var.countprivate
+  ami             = "var.ami" # Update with latest AMI
+  instance_type   = "var.instance_type"
+  key_name        = var.key_name
+  subnet_id       = aws_subnet.private[count.index].id
+  security_groups = [aws_security_group.ec2_sg.id]
+}
+

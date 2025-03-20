@@ -7,3 +7,6 @@ key_name = "newkeypairpublic"
 desired_capacity = 2
 max_size = 3
 min_size = 1
+countpublic = 1
+countprivate = 1
+ami = "ami-04b4f1a9cf54c11d0"

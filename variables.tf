@@ -50,3 +50,18 @@ variable "min_size" {
   type        = number
   default     = 1
 }
+variable "countpublic" {
+  description = "Minimum number of instances"
+  type        = number
+  default     = 1
+}
+
+variable "countprivate" {
+  description = "Minimum number of instances"
+  type        = number
+  default     = 1
+}
+variable "ami" {
+  description = "ami id"
+  type        = string
+}
